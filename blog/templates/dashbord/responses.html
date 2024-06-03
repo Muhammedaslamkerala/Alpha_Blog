@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+    <h1 class="text-center mb-4">Reader Responses</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card mb-3">
+                <div class="card-header">Responses</div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Response from John Doe</div>
+                                <div><small>Article: How to Boost Your Productivity</small></div>
+                                <p class="mb-1">Great article! I really enjoyed the insights on the topic...</p>
+                                <small>Received on: 2024-05-30</small>
+                            </div>
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-info btn-sm me-2">View</a>
+                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Response from Jane Smith</div>
+                                <div><small>Article: The Impact of Climate Change</small></div>
+                                <p class="mb-1">I found some errors in the data presented, please check...</p>
+                                <small>Received on: 2024-05-28</small>
+                            </div>
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-info btn-sm me-2">View</a>
+                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                        <!-- Repeat for additional responses -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "blog/css/search_style.css" %}">
+{% endblock extra_head %}
+{% block content %}
+<div class="container">
+    <!-- Inside the search-bar div -->
+    <form class="form-inline" onsubmit="performSearch(event)">
+        <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search for blogs" aria-label="Search"   id="search-input">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+    <h1 class="my-4">Search Results</h1>
+    <div id="search-results-container"></div>
+     <div class="post" data-category="Food" data-tags="Recipe,Healthy">
+     <div class="post-title">Post Title 3</div>
+     <div class="post-excerpt">This is a short excerpt of the blog post about Food...</div>
+     <a href="#" class="btn btn-primary">Read More</a>
+     
+    </div>
+</div>
+
+{% endblock content %}
+{% block extra_script %}
+<script src="{% static "comments/js/comment_script.js" %}"> </script>
+{% endblock extra_script %}

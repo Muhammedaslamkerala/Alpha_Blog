@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 from decouple import config
 
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'blog',
     'comments',
     'tags',
-    'users'
+    'users',
+    
 ]
 
 MIDDLEWARE = [
@@ -61,7 +63,11 @@ ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/ 'templates',
+                 BASE_DIR/ 'blog'/ 'templates',
+                 BASE_DIR/ 'comments'/'templates',
+                 BASE_DIR/ 'users'/'templates',
+               ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,6 +129,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    BASE_DIR/ "blog" / "static",
+    BASE_DIR/ "users" / "static",
+    BASE_DIR/ "comments" / "static",
+]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

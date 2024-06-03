@@ -1,0 +1,16 @@
+.post-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.post-excerpt {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+.post {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "blog/css/home_style.css" %}">
+{% endblock extra_head %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="search-bar">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search for blogs" aria-label="Search">
+                    {% comment %} <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> {% endcomment %}
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="{% url "blog:search" %}">Search</a> 
+                </form>
+            </div>
+
+            <div id="posts-container">
+                <div class="post" data-category="Technology" data-tags="AI,ML,Data">
+                    <div class="post-title">Post Title 1</div>
+                    <div class="post-excerpt">This is a short excerpt of the blog post about Technology...</div>
+                    <a href="{% url "blog:post_details" %}" class="btn btn-primary">Read More</a>
+                    <div class="post-tags">
+                        <a href="#" onclick="filterPostsByTag('AI')">#AI</a>
+                        <a href="#" onclick="filterPostsByTag('ML')">#ML</a>
+                        <a href="#" onclick="filterPostsByTag('Data')">#Data</a>
+                    </div>
+                </div>
+                <div class="post" data-category="Travel" data-tags="Adventure,Holiday">
+                    <div class="post-title">Post Title 2</div>
+                    <div class="post-excerpt">This is a short excerpt of the blog post about Travel...</div>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                    <div class="post-tags">
+                        <a href="#" onclick="filterPostsByTag('Adventure')">#Adventure</a>
+                        <a href="#" onclick="filterPostsByTag('Holiday')">#Holiday</a>
+                    </div>
+                </div>
+                <div class="post" data-category="Food" data-tags="Recipe,Healthy">
+                    <div class="post-title">Post Title 3</div>
+                    <div class="post-excerpt">This is a short excerpt of the blog post about Food...</div>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                    <div class="post-tags">
+                        <a href="#" onclick="filterPostsByTag('Recipe')">#Recipe</a>
+                        <a href="#" onclick="filterPostsByTag('Healthy')">#Healthy</a>
+                    </div>
+                </div>
+                <!-- Add more posts here with different categories and tags -->
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Categories</h4>
+            <ul class="category-list">
+                <li><a href="#" onclick="filterPosts('All')">Show All</a></li>
+                <li><a href="#" onclick="filterPosts('Technology')">Technology</a></li>
+                <li><a href="#" onclick="filterPosts('Travel')">Travel</a></li>
+                <li><a href="#" onclick="filterPosts('Food')">Food</a></li>
+                <li><a href="#" onclick="filterPosts('Lifestyle')">Lifestyle</a></li>
+                <li><a href="#" onclick="filterPosts('Business')">Business</a></li>
+            </ul>
+            
+            <h4>Tags</h4>
+            <ul class="tag-list">
+                <li><a href="#" onclick="filterPostsByTag('All')">Show All</a></li>
+                <li><a href="#" onclick="filterPostsByTag('AI')">#AI</a></li>
+                <li><a href="#" onclick="filterPostsByTag('ML')">#ML</a></li>
+                <li><a href="#" onclick="filterPostsByTag('Data')">#Data</a></li>
+                <li><a href="#" onclick="filterPostsByTag('Adventure')">#Adventure</a></li>
+                <li><a href="#" onclick="filterPostsByTag('Holiday')">#Holiday</a></li>
+                <li><a href="#" onclick="filterPostsByTag('Recipe')">#Recipe</a></li>
+                <li><a href="#" onclick="filterPostsByTag('Healthy')">#Healthy</a></li>
+                <!-- Add more tags here -->
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extra_script %}
+<script src="{% static "blog/js/home_script.js" %}"> </script>
+{% endblock extra_script %}
