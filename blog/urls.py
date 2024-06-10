@@ -4,15 +4,16 @@ from blog import views
 app_name = 'blog'
 
 urlpatterns = [
-    path('',views.home,name='home'),
-    path('search/', views.search, name='search'),
-    path('post/', views.post_details, name='post_details'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('dashboard/write/', views.write, name='write'),
-    path('dashboard/drafts/', views.drafts, name='drafts'),
-    path('dashboard/edit/', views.edit, name='edit'),
+    path('',views.PostListView.as_view(),name='home'),
+    path('category/<int:pk>', views.CategoryListView.as_view(), name='category'),
+    path('post/<int:pk>/', views.PostDetailView.as_view(), name='post_details'),
+    path('search/', views.SearchListView.as_view(), name='search'),
+    path('dashboard/', views.DashbordView.as_view(), name='dashboard'),
+    path('dashboard/post/write/', views.PostCreateView.as_view(), name='write'),
+    path('dashboard/post/delete/', views.PostDeleteView.as_view(),name='delete'),
+    path('dashboard/post/drafts/', views.drafts, name='drafts'),
+    path('dashboard/post/edit/', views.PostEditView.as_view(), name='edit'),
     path('dashboard/published/', views.published, name='published'),
     path('dashboard/responses', views.responses, name='responses'),
-    path('search/',views.search,name='search')
    
 ]

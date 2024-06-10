@@ -1,4 +1,4 @@
-from typing import Any
+
 from django.db import models
 from users.models import Author
 from tags.models import Tag
@@ -8,6 +8,7 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -21,3 +22,5 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+    

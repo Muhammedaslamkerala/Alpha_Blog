@@ -6,22 +6,24 @@
 {% block content %}
 <div class="container">
     <!-- Inside the search-bar div -->
-    <form class="form-inline" onsubmit="performSearch(event)">
-        <input class="form-control mr-sm-2 w-75" type="search" placeholder="Search for blogs" aria-label="Search"   id="search-input">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    {% include "blog/searchbar.html" %}
 
     <h1 class="my-4">Search Results</h1>
+    {% if search_post_list %}
+    {% for post in search_post_list %}
     <div id="search-results-container"></div>
-     <div class="post" data-category="Food" data-tags="Recipe,Healthy">
-     <div class="post-title">Post Title 3</div>
-     <div class="post-excerpt">This is a short excerpt of the blog post about Food...</div>
-     <a href="#" class="btn btn-primary">Read More</a>
-     
+     <div class="post">
+     <div class="post-title">{{post.title}}</div>
+     <div class="post-excerpt">{{post.body|truncatewords:50}}</div>
+     <a href="{% url "blog:post_details"  post.id %}" class="btn btn-primary">Read More</a>
     </div>
+    {% endfor %}
+    {% else %}
+    <div class="text-center fs-2">
+        No Results Found
+      </div>
+    {% endif %}
+    
 </div>
 
 {% endblock content %}
-{% block extra_script %}
-<script src="{% static "comments/js/comment_script.js" %}"> </script>
-{% endblock extra_script %}

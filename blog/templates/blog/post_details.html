@@ -7,10 +7,9 @@
 {% block content %}
 <div class="container">
     <div class="post">
-        <div class="post-title">Post Title</div>
+        <div class="post-title">{{ post.title }}</div>
         <div class="post-content">
-            <p>This is the full content of the blog post. It includes detailed information about the topic discussed in the post.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+            <p>{{ post.body }}</p>
         </div>
     </div>
     {% include "comments/comment.html" %}
@@ -18,5 +17,5 @@
     
 {% endblock content %}
 {% block extra_script %}
-<script src="{% static "comments/js/comment_script.js" %}"> </script>
+{% comment %} <script src="{% static "comments/js/comment_script.js" %}"> </script> {% endcomment %}
 {% endblock extra_script %}
