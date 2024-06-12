@@ -10,10 +10,10 @@ urlpatterns = [
     path('search/', views.SearchListView.as_view(), name='search'),
     path('dashboard/', views.DashbordView.as_view(), name='dashboard'),
     path('dashboard/post/write/', views.PostCreateView.as_view(), name='write'),
-    path('dashboard/post/delete/', views.PostDeleteView.as_view(),name='delete'),
-    path('dashboard/post/drafts/', views.drafts, name='drafts'),
-    path('dashboard/post/edit/', views.PostEditView.as_view(), name='edit'),
-    path('dashboard/published/', views.published, name='published'),
+    path('dashboard/post/<int:pk>/delete', views.PostDelete.as_view(),name='post_delete'),
+    path('dashboard/post/drafts/', views.DraftListView.as_view(), name='post_draft'),
+    path('dashboard/post/<int:pk>/edit/', views.PostEditView.as_view(), name='post_edit'),
+    path('dashboard/published/', views.PostPublishedListView.as_view(), name='published'),
     path('dashboard/responses', views.responses, name='responses'),
    
 ]
