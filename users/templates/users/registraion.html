@@ -10,11 +10,9 @@
 <body>
     <div class="login-container">
         <h2>Register</h2>
-        <form action="/submit-registration" method="post">
-            <input type="text" name="fullname" placeholder="Full Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
             <input type="submit" value="Create Account">
         </form>
     </div>

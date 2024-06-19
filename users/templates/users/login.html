@@ -11,9 +11,9 @@
 
     <div class="login-container">
         <h2 class="login-title">Login</h2>
-        <form>
-            <input type="email" class="form-control" placeholder="Email Address" required>
-            <input type="password" class="form-control" placeholder="Password" required>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
             <button type="submit" class="btn">Sign In</button>
         </form>
     </div>

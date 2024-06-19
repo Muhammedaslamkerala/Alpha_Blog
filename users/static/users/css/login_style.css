@@ -28,6 +28,10 @@ body {
     border-radius: 3px;
     box-sizing: border-box;
 }
+.form-control-checkbox {
+    margin-right: 10px;
+    transform: scale(1.5); 
+}
 .btn {
     width: 100%;
     padding: 10px;

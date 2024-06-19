@@ -78,7 +78,7 @@ class PostCreateView(View):
         is_published = request.POST.get('is_published') == 'on'
 
         if title and body:
-           user_instance = User.objects.get(username='user1')
+           user_instance = User.objects.get(username=request.user)
            user = Author.objects.get(user=user_instance)
            post = Post(title=title, body=body,author= user,is_published=is_published)
            post.save()
