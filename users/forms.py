@@ -1,10 +1,9 @@
 from typing import Any
 from django import forms
-from django.contrib.auth.models import User
-from . models import Author
+from django.contrib.auth import get_user_model
 
 
-class RegistraionForm(forms.ModelForm):
+class RegistrationForm(forms.ModelForm):
     
        password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'password', 'style': 'width:95%;'}))
        
@@ -12,7 +11,7 @@ class RegistraionForm(forms.ModelForm):
        
        
        class Meta:
-              model = User
+              model = get_user_model()
               fields = ['first_name', 'last_name', 'username', 'email']
               widgets = {
               'first_name':forms.TextInput(attrs={'placeholder':'First name', 'style': 'width:95%;'}),
@@ -36,13 +35,13 @@ class RegistraionForm(forms.ModelForm):
        
        def clean_username(self):
               username = self.cleaned_data.get('username')
-              if User.objects.filter(username=username).exists():
+              if CustomUser.objects.filter(username=username).exists():
                      raise forms.ValidationError("Username is already taken")
               return username
        
        def clean_email(self):
               email = self.cleaned_data.get('email')
-              if User.objects.filter(email=email).exists():
+              if CustomUser.objects.filter(email=email).exists():
                      raise forms.ValidationError("Email is already taken")
               return email
        
@@ -52,7 +51,6 @@ class RegistraionForm(forms.ModelForm):
               user.set_password(self.cleaned_data['password1'])
               if commit:
                     user.save()
-                    Author.objects.create(user=user)
               return user
        
 

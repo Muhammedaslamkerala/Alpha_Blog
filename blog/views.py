@@ -2,14 +2,13 @@ from typing import Any
 
 from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.urls import reverse_lazy,reverse
+from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect 
-from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.views.generic import DetailView,  ListView, TemplateView, DeleteView
 from django.views import View
 from . models import Post, Category
-from users.models import Author
+from django.contrib.auth import get_user_model
 from tags.models import Tag
 # Create your views here.
 class PostListView(ListView):
@@ -79,7 +78,7 @@ class PostCreateView(View):
 
         if title and body:
            user_instance = User.objects.get(username=request.user)
-           user = Author.objects.get(user=user_instance)
+           user = get_user_model().objects.get(user=user_instance)
            post = Post(title=title, body=body,author= user,is_published=is_published)
            post.save()
            

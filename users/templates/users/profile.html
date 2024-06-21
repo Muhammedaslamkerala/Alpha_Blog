@@ -5,35 +5,26 @@
         <div class="col-md-4">
             <div class="card">
                 <img src="https://via.placeholder.com/150" class="card-img-top" alt="User Image">
-                <div class="card-body"> 
-                    <h5 class="card-title">{{ user.username }}</h5>
-                    <p class="card-text">This is a short user bio. Let people know more about you.</p>
-                    
-                    <!-- Trigger/Edit Profile Modal -->
+                <div class="card-body">
+                    <h5 class="card-title">{{ author.user.username }}</h5>
+                    <p class="card-text">{{ author.bio }}</p>
                     <button type="button" class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                      Edit Profile
-                    </button> 
+                        Edit Profile
+                    </button>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
-            <!-- Details Card -->
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Bio</h5>
-                    <p class="card-text">Here you can add more details about the user.</p>
+                    <p class="card-text">{{ author.bio }}</p>
                 </div>
             </div>
-            <!-- Other Information Card -->
-            {% comment %} <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Other Information</h5>
-                    <p class="card-text">Additional information can go here, like hobbies, interests, or anything else.</p>
-                </div>
-            </div> {% endcomment %}
         </div>
     </div>
 </div>
+
 
 {% include "users/edit_profile.html" %}
 

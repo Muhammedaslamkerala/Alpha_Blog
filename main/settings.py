@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'decouple',
+    'django_ckeditor_5',
     'blog',
     'comments',
     'tags',
@@ -93,6 +94,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -128,14 +130,38 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR/ "blog" / "static",
-    BASE_DIR/ "users" / "static",
-    BASE_DIR/ "comments" / "static",
+    BASE_DIR / "blog" / "static",
+    BASE_DIR / "users" / "static",
+    BASE_DIR / "comments" / "static",
 ]
 
+# CKEditor Configuration
+
+CKEDITOR_UPLOAD_PATH = 'uploads'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            {'name': 'document', 'items': ['Source']},
+            {'name': 'styles', 'items': ['Format', 'Font', 'FontSize']},
+            {'name': 'basicstyles', 'items': ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'paragraph', 'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert', 'items': ['Image', 'Table', 'HorizontalRule']},
+            {'name': 'tools', 'items': ['Maximize']},
+        ],
+        'height': 300,
+        'width': '100%',
+        'filebrowserUploadUrl': '/ckeditor/upload/',  # URL endpoint for CKEditor file uploads
+        'extraPlugins': 'uploadimage',  # Enable the image upload plugin
+        'uploadUrl': '/ckeditor/upload/',  # URL endpoint for image uploads
+    },
+}
 
 
 # Default primary key field type
@@ -143,5 +169,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 LOGIN_REDIRECT_URL = 'blog:home'
 LOGOUT_REDIRECT_URL = 'users:login'
+

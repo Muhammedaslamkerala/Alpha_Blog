@@ -2,18 +2,17 @@ from django.shortcuts import render, redirect ,get_object_or_404
 from django.views import View
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView,LogoutView
-from .forms import RegistraionForm, LoginForm
+from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
 from django.utils import timezone
-from .models import Author
+from django.contrib.auth import get_user_model
 from django.contrib import sessions
 # Create your views here.
 
 class UserRegistration(CreateView):
      template_name = 'users/registraion.html'
-     form_class = RegistraionForm
+     form_class = RegistrationForm
      success_url = reverse_lazy('users:login')
      
 class UserLoginView(View):
@@ -50,7 +49,7 @@ class LogoutUserView(View):
 class UserProfileView(View):
     template_name = 'users/profile.html'
 
-    def get(self, request):
-        user = request.user
-        author = Author.objects.get(user)
-        return render(request, self.template_name, {'user':author})
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs.get('user_id')
+        author = get_object_or_404(get_user_model(), id=user_id)
+        return render(request, self.template_name, {'author': author})
