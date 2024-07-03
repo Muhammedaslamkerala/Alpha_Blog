@@ -1,29 +1,31 @@
-<!-- Edit Profile Modal -->
-<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Edit Profile Form -->
-          <form>
-            <div class="mb-3">
-              <label for="userName" class="form-label">Name</label>
-              <input type="text" class="form-control" id="userName" placeholder="Enter your name">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Edit Profile</div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                             {{ form.as_p }}
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-              <label for="userBio" class="form-label">Bio</label>
-              <textarea class="form-control" id="userBio" rows="3"></textarea>
-            </div>
-            {% comment %} <div class="mb-3">
-              <label for="userImage" class="form-label">Profile Image</label>
-              <input class="form-control" type="file" id="userImage">
-            </div> {% endcomment %}
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+
+    <!-- Bootstrap JS and dependencies (if needed) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

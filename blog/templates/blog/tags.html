@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "blog/css/tags_style.css" %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="container">
+    
+    <div class="tag-list">
+        <h5>Tags</h5>
+        <ul>
+           <li>{{ tag.name }}</li>
+        </ul>
+    </div>
+    <hr>
+
+    <!-- Posts List -->
+    
+    <div class="posts-list">
+            <h2>Posts</h2>
+            {% for  post in  post_list%}
+            <div class="card mb-3">
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Posted by {{ post.author}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ post.published_date }}</h6>
+                    <a href="{% url "blog:post_details" post.id %}" class="btn btn-primary">Read More</a>
+                </div>
+            
+            </div>
+            {% endfor %}
+        </div>
+    <div>
+</div>
+
+{% endblock content %}

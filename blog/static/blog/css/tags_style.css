@@ -1,0 +1,24 @@
+.tag-list {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.tag-list ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tag-list ul li {
+    margin: 5px 10px;
+}
+.posts-list {
+    margin-top: 20px;
+}
+.post {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}

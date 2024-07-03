@@ -14,7 +14,6 @@
     <div id="search-results-container"></div>
      <div class="post">
      <div class="post-title">{{post.title}}</div>
-     <div class="post-excerpt">{{post.body|truncatewords:50}}</div>
      <a href="{% url "blog:post_details"  post.id %}" class="btn btn-primary">Read More</a>
     </div>
     {% endfor %}

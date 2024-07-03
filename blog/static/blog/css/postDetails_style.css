@@ -19,3 +19,24 @@ body {
     font-size: 1.2rem;
     margin: 20px 0;
 }
+
+.post .post-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Responsive iframes */
+.post .post-content iframe {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;  
+}
+
+/* Additional styling to handle older browsers if needed */
+.post .post-content iframe {
+    width: 100%;
+    height: 100%;
+}

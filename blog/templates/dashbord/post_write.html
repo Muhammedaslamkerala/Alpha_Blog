@@ -7,33 +7,10 @@
             <div class="card">
                 <div class="card-header">New Article</div>
                 <div class="card-body">
-                    <form method="post"> 
+                    <form method="post" action="{% url 'blog:post_write' %}" novalidate>
+                        {{ form.media }}
                         {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" placeholder="Enter the title" name='title'>
-                        </div>
-                        <div class="mb-3">
-                            <label for="body" class="form-label">Body</label>
-                            <textarea class="form-control" id="body" rows="10" placeholder="Write your content here" name="body"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tags" class="form-label">Tags</label>
-                            <input type="text" class="form-control" id="tags" placeholder="Enter tags separated by commas" name="tags">
-                        </div>
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Category</label>
-                            <select class="form-control" id="category" name="category">
-                                {% for category in categories %}
-                                <option value="{{category.id}}">{{category.name}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="is_published" name="is_published">
-                            <label class="form-check-label" for="is_published">Publish</label>
-                        </div>
-                        
+                        {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="reset" class="btn btn-secondary">Reset</button>
                     </form>
