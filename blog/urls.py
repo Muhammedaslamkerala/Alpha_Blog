@@ -14,7 +14,5 @@ urlpatterns = [
     path('dashboard/post/drafts/', views.DraftListView.as_view(), name='post_draft'),
     path('dashboard/post/<int:pk>/edit/', views.PostEditView.as_view(), name='post_edit'),
     path('dashboard/published/', views.PostPublishedListView.as_view(), name='published'),
-    path('dashboard/responses/', views.responses, name='responses'),
-    path('post/tags/<int:pk>/', views.TagPostListview.as_view(), name='post_tags'),
-   
+    path('post/tags/<int:pk>/', views.TagPostListview.as_view(), name='post_tags'),  
 ]

@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from .managers import CustomUserManager
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 # Create your models here.
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -21,6 +22,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+   
 
     def get_by_natural_key(self, email):
         return self.objects.get(email=email)
@@ -30,9 +32,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('Users')
 
     def __str__(self) -> str:
-        return self.email
+        return f"{self.first_name} {self.last_name} - " + self.email
     
     def get_full_name(self):
         full_name = f"{self.first_name} {self.last_name}"
         return full_name.strip() 
     
+    def get_profile_picture_url(self):
+        if self.profile_picture and hasattr(self.profile_picture, 'url'):
+            return self.profile_picture.url
+        else:
+           return settings.STATIC_URL +  'users/image/profile_pictures/default_picture.png'

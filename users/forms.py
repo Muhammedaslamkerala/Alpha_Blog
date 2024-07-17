@@ -25,8 +25,19 @@ class LoginForm(AuthenticationForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'bio',]
-        
+        fields = ['first_name', 'last_name','profile_picture', 'bio',]
+        widget = {
+             'bio': forms.Textarea(attrs={'rows': 4})
+        }
+    def __init__(self, *args, **kwargs):
+         super().__init__(*args, **kwargs)
+         self.fields['profile_picture'].widget.attrs.update({'class': 'form-control-file', 'accept': 'image/*'})
+
+    def clean_profile_picture(self):
+        profile_picture = self.cleaned_data.get('profile_picture')
+        if profile_picture:
+             return profile_picture
+        return None
     
     
           

@@ -13,7 +13,7 @@
            <li>{{ tag.name }}</li>
         </ul>
     </div>
-    <hr>
+    
 
     <!-- Posts List -->
     
@@ -24,7 +24,7 @@
                 
                 <div class="card-body">
                     <h5 class="card-title">{{post.title}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Posted by {{ post.author}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Posted by {{ post.author.get_full_name}}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">{{ post.published_date }}</h6>
                     <a href="{% url "blog:post_details" post.id %}" class="btn btn-primary">Read More</a>
                 </div>

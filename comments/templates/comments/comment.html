@@ -1,9 +1,10 @@
 <div class="comment-section">
     <div class="comment-form">
         <h5>Leave a Comment</h5>
-        <form id="comment-form">
+        <form method="POST" >
+            {% csrf_token %}
             <div class="mb-3">
-                <textarea class="form-control" id="comment" rows="3" placeholder="Enter your comment" required></textarea>
+                {{ form.as_p }}
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -12,13 +13,12 @@
     <h4>Comments</h4>
     <div id="comments-list">
         <!-- Comments will be dynamically loaded here -->
+         {% for comment in comments %}
         <div class="comment">
-            <div class="comment-author">John Doe</div>
-            <div class="comment-text">This is a great post!</div>
+            <div class="comment-author">{{ comment.author.get_full_name }}</div>
+            {% comment %} <p>Posted on {{ comment.created_at|date:"F d, Y" }}</p> {% endcomment %}
+            <div class="comment-text">{{ comment.body }}</div>
         </div>
-        <div class="comment">
-            <div class="comment-author">Jane Smith</div>
-            <div class="comment-text">Thanks for sharing this information.</div>
-        </div>
+        {% endfor %}
     </div>
 </div>

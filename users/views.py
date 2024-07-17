@@ -1,8 +1,10 @@
+from pyexpat.errors import messages
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect ,get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.views.generic import DetailView, UpdateView
 from django.contrib.auth.views import LoginView
@@ -40,7 +42,7 @@ class LogoutUserView(View):
         return redirect(reverse_lazy('blog:home'))
         
                 
-class UserProfileView(DetailView):
+class UserProfileView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'users/profile.html'
     context_object_name = 'user'
@@ -48,7 +50,7 @@ class UserProfileView(DetailView):
     def get_object(self, queryset= None):
         return get_object_or_404(self.model, id=self.request.user.id)
     
-class UserProfileEdit(UpdateView):
+class UserProfileEdit(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = ProfileEditForm
     template_name = 'users/edit_profile.html'
@@ -60,4 +62,12 @@ class UserProfileEdit(UpdateView):
     
     def get_success_url(self):
         return reverse(self.success_url, kwargs={'pk':self.request.user.pk})
+    
+    def form_valid(self, form):
+        if 'profile_picture-clear' in self.request.POST:
+            # User wants to remove the profile picture
+            self.object.profile_picture.delete(save=False)
+            self.object.profile_picture = None
+    
+        return super().form_valid(form)
     

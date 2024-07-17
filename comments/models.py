@@ -11,4 +11,4 @@ class Comment(models.Model):
     published_date = models.DateTimeField(auto_now_add=True, verbose_name=_("Published Date"))
 
     def __str__(self) -> str:
-        return f'{self.author.username} - {self.post.title}'
+        return f'{self.author.get_full_name} - {self.post.title}'

@@ -145,7 +145,8 @@ STATICFILES_DIRS = [
 
 # CKEditor Configuration
 
-CKEDITOR_UPLOAD_PATH = 'uploads'
+
+
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': [
@@ -177,7 +178,9 @@ CKEDITOR_5_CONFIGS = {
     }
 }
 
+# Custom Stronge Configurations
 
+DEFAULT_FILE_STORAGE = 'blog.custom_storage.PostImageStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -187,8 +190,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'blog:home'
 LOGOUT_REDIRECT_URL = 'users:login'
+
 
 INTERNAL_IPS = [
     "127.0.0.1",
