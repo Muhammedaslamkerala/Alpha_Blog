@@ -1,0 +1,86 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+.container {
+    margin-top: 50px;
+}
+.stats-card, .latest-posts, .lifetime-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.stats-card h3, .latest-posts h4, .lifetime-section h4 {
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+.filter-options {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+.filter-options select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    font-size: 1rem;
+    margin-right: 10px;
+}
+.total-post-count {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+.stat-item, .lifetime-item, .post-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+}
+.stat-item i, .lifetime-item i, .post-item i {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-right: 15px;
+}
+.stat-value, .lifetime-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #343a40;
+}
+.stat-label, .lifetime-label {
+    font-size: 1rem;
+    color: #6c757d;
+}
+.post-item h5 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+.post-details, .post-stats {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+.post-stats span {
+    margin-right: 15px;
+}
+.view-story-link {
+    text-align: right;
+}
+.view-story-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+.view-story-link a:hover {
+    text-decoration: underline;
+}

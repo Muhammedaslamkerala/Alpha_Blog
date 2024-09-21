@@ -1,0 +1,219 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f8f9fa;
+    --text-color: #333;
+    --text-light: #6c757d;
+    --border-color: #e0e0e0;
+    --error-color: #dc3545;
+    --success-color: #28a745;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.register-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.register-form-container {
+    flex: 1;
+    padding: 3rem;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.register-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.register-header p {
+    color: var(--text-light);
+}
+
+.register-form {
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.register-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.register-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-check-input {
+    margin-right: 0.5rem;
+}
+
+.form-check-label {
+    font-size: 0.9rem;
+}
+
+.form-check-label a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.error-message {
+    color: var(--error-color);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-register {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #3a7bc8;
+}
+
+.register-options {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-prompt a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.login-prompt a:hover {
+    color: #3a7bc8;
+}
+
+.social-register {
+    text-align: center;
+}
+
+.social-register-text {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn-social {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-social:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google { background-color: #DB4437; }
+.btn-facebook { background-color: #4267B2; }
+.btn-github { background-color: #333; }
+
+.register-image-container {
+    flex: 1;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.register-image {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        flex-direction: column;
+    }
+
+    .register-image-container {
+        display: none;
+    }
+
+    .register-form-container {
+        padding: 2rem;
+    }
+}

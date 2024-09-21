@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from decouple import config
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,22 +34,28 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'decouple',
     'django_ckeditor_5',
     'blog',
     'comments',
-    'tags',
-    'users',
+    'accounts',
+    'taggit',
+    'social_django',
+   
     
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -69,7 +76,7 @@ TEMPLATES = [
         'DIRS': [BASE_DIR/ 'templates',
                  BASE_DIR/ 'blog'/ 'templates',
                  BASE_DIR/ 'comments'/'templates',
-                 BASE_DIR/ 'users'/'templates',
+                 BASE_DIR/ 'accounts'/'templates',
                ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -78,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.categories_processor',
             ],
         },
     },
@@ -96,7 +104,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
 
@@ -135,11 +143,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "blog" / "static",
-    BASE_DIR / "users" / "static",
+    BASE_DIR / "accounts" / "static",
     BASE_DIR / "comments" / "static",
 ]
 
@@ -147,18 +155,19 @@ STATICFILES_DIRS = [
 
 
 
+
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': [
             'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 
-            'imageUpload', 'mediaEmbed', 'undo', 'redo', 
+            'imageUpload', 'mediaEmbed', 'undo', 'redo',
         ],
         'heading': {
             'options': [
                 {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
                 {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
                 {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
-                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'}
+                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
             ]
         },
         'image': {
@@ -174,9 +183,16 @@ CKEDITOR_5_CONFIGS = {
         'mediaEmbed': {
             'previewsInData': True
         },
-       
+        'highlight': {
+            'languages': [
+                { 'language': 'plaintext', 'label': 'Plain text' },
+                { 'language': 'javascript', 'label': 'JavaScript' },
+                { 'language': 'python', 'label': 'Python' },
+            ]
+        }
     }
 }
+
 
 # Custom Stronge Configurations
 
@@ -190,14 +206,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = 'users:login'
-LOGIN_REDIRECT_URL = 'blog:home'
-LOGOUT_REDIRECT_URL = 'users:login'
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'blog:post_list'
+LOGOUT_REDIRECT_URL = 'blog:home'
 
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+
+
+
 
 DEFAULT_PROFILE_PICTURE = 'profile_pictures/default_picture.png'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
 

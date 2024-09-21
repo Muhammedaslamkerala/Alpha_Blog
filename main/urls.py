@@ -22,16 +22,15 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
-    path('account/', include('users.urls')),
+    path('', include('blog.urls', namespace='blog')),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
     path('ckeditor5/', include('django_ckeditor_5.urls')),
    
-   
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar    
     urlpatterns += path("__debug__/", include("debug_toolbar.urls")),
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ 
 
    

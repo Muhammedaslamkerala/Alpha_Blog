@@ -1,175 +1,144 @@
 from typing import Any
 
-from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.forms import BaseModelForm
-from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy, reverse
-from django.shortcuts import render, get_object_or_404, redirect 
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView,  ListView, TemplateView, DeleteView, CreateView
-from django.views import View
-from django.views.generic.edit import UpdateView, FormMixin
-from . models import Post, Category
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import DetailView,  ListView, DeleteView, CreateView, TemplateView, View
+from django.views.generic.edit import UpdateView
+from django.utils.http import urlencode
+from . models import Post, Category, SavedPost
 from django.contrib.auth import get_user_model
-from tags.models import Tag
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PostCreationForm, PostEditForm
-from comments.forms import CommentForm
-# Create your views here.
-class PostListView(ListView):
+
+
+class EntryHomeView(TemplateView):
+    template_name = 'blog/entry_home_page.html'
+
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
-    template_name = 'blog/home.html'
+    template_name = 'blog/logged_user_home_page.html'
     context_object_name = 'post_list'
     
+        
     def get_queryset(self):
-        return Post.objects.filter(is_published=True).order_by("-published_date")
-    
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
-
-class CategoryPostListView(ListView):  
-     model = Post
-     template_name = 'blog/category.html'
-     context_object_name = 'post_list'
-
-     def get_queryset(self):
-        category = Post.objects.filter(categories__id=self.kwargs.get('pk'))
-        return category
-    
-     def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all() 
-        return context
-    
+        category_slug = self.request.GET.get('category')
+        if category_slug:
+           category = get_object_or_404(Category, slug=category_slug)
+           return Post.published.filter(categories=category)
+        return Post.published.all()
     
 
-class PostDetailView(LoginRequiredMixin, FormMixin, DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
-    template_name = 'blog/post_details.html'
+    template_name = 'blog/post_details_page.html'
     context_object_name = 'post'
-    form_class = CommentForm
     
     def get_object(self):
-        return get_object_or_404(Post, id=self.kwargs.get('pk'))
+        return get_object_or_404(Post, slug=self.kwargs.get('slug'))
     
     def get_success_url(self):
-        return reverse('blog:post_details', kwargs={'pk': self.object.pk})
+        return reverse('blog:post_details', kwargs={'slug': self.object.slug})
     
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        return super().get_context_data(**kwargs)
     
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     queryset = queryset.prefetch_related('comment_set').order_by('-comment_set__published_date') # When you want to sort or filter objects based on fields of related models, you use the double underscore (__) syntax to navigate across relationships. 
-    #     return queryset   not working
 
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        post = self.get_object()
-        context["comments"] =  post.comments.all().order_by('-published_date')
-        return context
-    
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_valid(form)
-    
-    def form_valid(self, form):
-        comment = form.save(commit=False)
-        comment.post = self.object
-        comment.author = self.request.user
-        comment.save()
-        return super().form_valid(form)
+def saved(request):
+    return render(request, 'blog/posts_saved_lists_page.html')
 
-             
-class SearchListView(ListView):
+
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    template_name = 'blog/search.html'
-    context_object_name = 'search_post_list'
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        if query:
-            return Post.objects.filter(
-                Q(title__icontains=query) | 
-                Q(tags__name__icontains=query) | 
-                Q(categories__name__icontains=query)
-            ).distinct()
-         
-
-class TagPostListview(ListView):
-    model = Post
-    template_name = 'blog/tags.html'
-    context_object_name = 'post_list'
-
-    def get_queryset(self) -> QuerySet[Any]:
-        tag = get_object_or_404(Tag, id=self.kwargs.get('pk'))
-        tag_by_post = Post.objects.filter(tags=tag)
-        return tag_by_post
-    
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["tag"] = get_object_or_404(Tag, id=self.kwargs.get('pk'))
-        return context
-    
-    
-    
-     
-class PostCreateView(LoginRequiredMixin,CreateView):
-    model = Post
-    template_name = 'dashbord/post_write.html'
+    template_name = 'blog/post_write_page.html'
     form_class = PostCreationForm
-    success_url = reverse_lazy('blog:home')
+    success_url = reverse_lazy('blog:post_list')
    
-    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-   
+    
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+    
+    
 
-class PostEditView(LoginRequiredMixin,UpdateView):
+class PostEditView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostEditForm
-    template_name = 'dashbord/post_edit.html'
-    success_url = reverse_lazy('blog:home')
-
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
+    template_name = 'blog/post_edit_page.html'
     
-class PostDelete(LoginRequiredMixin,View):
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return self.object.get_absolute_url()
 
-    def get(self,request,pk):
-        post = get_object_or_404(Post,id=pk)
-        post.delete()
-        return redirect(request.META.get('HTTP_REFERER'))
-
-# class PostDelete(LoginRequiredMixin, DeleteView):
-#     model = Post
-#     template_name = 
-
-class DashbordView(LoginRequiredMixin,TemplateView):
-    template_name = 'dashbord/dashbord.html'
-
-class PostPublishedListView(LoginRequiredMixin,ListView):
-    model = Post 
-    template_name = 'dashbord/post_published.html'
-    context_object_name ='post_list'
-
-    def get_queryset(self) -> QuerySet[Any]:
-        return Post.objects.filter(is_published=True, author=self.request.user).order_by("-published_date")
-
-class DraftListView(LoginRequiredMixin,ListView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
-    template_name = 'dashbord/post_draft.html'
+    template_nameb = 'blog/post_confirm_delete.html'
+    
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        post = get_object_or_404(Post, slug=slug, author=self.request.user)
+        return post
+
+    def get_success_url(self):
+        params = urlencode({'deleted':True})
+
+        return reverse_lazy('blog:post_list') + '?' + params
+    
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return redirect(success_url)
+    
+class DraftAndPublishedPostListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'blog/publihsed_draft_posts_list_page.html'
     context_object_name = 'post_list'
 
     def get_queryset(self):
-        return Post.objects.filter(is_published=False, author=self.request.user ).order_by('-published_date')
+        queryset = super().get_queryset()
+        tab = self.request.GET.get('tab','published')
+
+        if tab == 'published':
+            return queryset.filter(status=Post.Status.PUBLISHED)
+        elif tab == 'draft':
+            return queryset.filter(status=Post.Status.DRAFT)
+        else:
+            return queryset
+        
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['selected_tab'] = self.request.GET.get('tab','published')
+        return context
     
 
+class PostSaveView(LoginRequiredMixin,View):
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        user = request.user
+
+        saved_post, created = SavedPost.objects.get_or_create(user=user, post=post)
+        if not created:
+            saved_post.delete()
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+
+class PostSavedListView(LoginRequiredMixin ,ListView):
+    model = SavedPost
+    template_name = 'blog/posts_saved_lists_page.html'
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return SavedPost.objects.filter(user=self.request.user) 
+    
+
+class UnifiedSearchView(View):
+    ...
+
+   
+    
 

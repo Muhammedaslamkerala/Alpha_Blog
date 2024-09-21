@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main class="container my-5">
+    <h1 class="text-center mb-4">Generate Your AI-Powered Blog Post</h1>
+    <form id="blogForm">
+        <div class="mb-3">
+            <label for="blogTopic" class="form-label">Blog Topic</label>
+            <input type="text" class="form-control" id="blogTopic" placeholder="Enter your blog topic" required>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" required>
+                <option value="">Choose a category</option>
+                <option value="technology">Technology</option>
+                <option value="health">Health</option>
+                <option value="finance">Finance</option>
+                <option value="lifestyle">Lifestyle</option>
+                <option value="travel">Travel</option>
+                <option value="food">Food</option>
+                <option value="sports">Sports</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="tags" class="form-label">Tags</label>
+            <input type="text" class="form-control" id="tags" placeholder="Enter tags (comma-separated)" required>
+        </div>
+        <div class="mb-3">
+            <label for="toneStyle" class="form-label">Tone/Style</label>
+            <select class="form-select" id="toneStyle" required>
+                <option value="">Choose a tone/style</option>
+                <option value="informative">Informative</option>
+                <option value="casual">Casual</option>
+                <option value="professional">Professional</option>
+                <option value="humorous">Humorous</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="wordCount" class="form-label">Word Count</label>
+            <input type="number" class="form-control" id="wordCount" placeholder="Enter desired word count" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate Blog Post</button>
+    </form>
+    <div id="result" class="mt-5"></div>
+</main>
+{% endblock  %}

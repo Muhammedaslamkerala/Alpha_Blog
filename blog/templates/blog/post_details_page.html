@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'blog/css/post_details_page_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMbrV6KkgwrD7dnU4ciAiSTP5rEe/eKkSK55B2" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+    <main class="container mt-5">
+        <article class="post-details">
+            <header class="post-header">
+                <img src="{{ post.author.profile_picture.url }}" alt="User Profile Image">
+                <div class="post-header-content">
+                    <div class="post-title-author">
+                        <h1 class="post-title">{{ post.title }}</h1>
+                        <p class="post-author">{{ post.author.get_full_name }}</p>
+                    </div>
+                    <div class="post-meta">
+                        <span><i class="fas fa-heart"></i> {{ post.like_count }} likes</span>
+                        <span><i class="fas fa-comment"></i> {{ post.comment_count }} comments</span>
+                        <span><i class="fas fa-clock"></i> {{ post.reading_time }} min read</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="post-content mt-4">
+                {{ post.body|safe }}
+
+                <div class="like-dislike-icons mt-4">
+                    <i class="fas fa-thumbs-up"></i>
+                    <i class="fas fa-thumbs-down"></i>
+                </div>
+            </div>
+        </article>
+
+        <button class="btn btn-primary" id="commentToggle">
+            <i class="fas fa-comments"></i> Comments
+        </button>
+
+        <div id="commentSidebar" class="sidebar">
+            <button id="closeSidebar" class="close-btn">&times;</button>
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <div class="comment-card">
+                    <div class="comment-header">
+                        <img src="https://source.unsplash.com/random/45x45?face" alt="User Image" class="user-avatar">
+                        <div class="comment-info">
+                            <div class="user-name">John Doe</div>
+                            <div class="comment-date">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        <p>This is a sample comment. Great post!</p>
+                    </div>
+                    <div class="comment-options">
+                        <button class="btn-like"><i class="fas fa-thumbs-up"></i> Like</button>
+                        <button class="btn-dislike"><i class="fas fa-thumbs-down"></i> Dislike</button>
+                        <button class="btn-reply"><i class="fas fa-reply"></i> Reply</button>
+                    </div>
+
+                    <!-- Replies -->
+                    <div class="reply-card">
+                        <div class="comment-header">
+                            <img src="https://source.unsplash.com/random/45x45?profile" alt="User Image" class="user-avatar">
+                            <div class="comment-info">
+                                <div class="user-name">Jane Doe</div>
+                                <div class="comment-date">1 hour ago</div>
+                            </div>
+                        </div>
+                        <div class="comment-content">
+                            <p>This is a sample reply to the comment.</p>
+                        </div>
+                        <div class="comment-options">
+                            <button class="btn-like"><i class="fas fa-thumbs-up"></i> Like</button>
+                            <button class="btn-dislike"><i class="fas fa-thumbs-down"></i> Dislike</button>
+                            <button class="btn-reply"><i class="fas fa-reply"></i> Reply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more comment cards here -->
+
+                <div class="reply-form">
+                    <textarea placeholder="Write a comment..."></textarea>
+                    <button class="btn-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('commentSidebar');
+            const commentToggle = document.getElementById('commentToggle');
+            const closeSidebar = document.getElementById('closeSidebar');
+
+            function toggleSidebar() {
+                sidebar.classList.toggle('open');
+            }
+
+            commentToggle.addEventListener('click', toggleSidebar);
+            closeSidebar.addEventListener('click', toggleSidebar);
+        });
+    </script>
+{% endblock %}

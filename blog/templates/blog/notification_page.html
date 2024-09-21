@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% load static %} {% block extra_head %} <link
+rel="stylesheet" href="{% static "blog/css/notification_page_style.css" %}"> {%
+endblock %} {% block content %}
+<main class="container">
+  <div class="notification-card">
+    <img
+      src="https://source.unsplash.com/random/40x40?face"
+      alt="User Profile Image"
+    />
+    <div class="notification-content">
+      <p>
+        <i class="fas fa-thumbs-up notification-icon"></i
+        ><strong>John Doe</strong> liked your post "The Future of AI".
+      </p>
+      <div class="notification-time">2 hours ago</div>
+      <div class="notification-actions">
+        <a href="#">Reply</a>
+        <a href="#">Like</a>
+        <a href="#">Dislike</a>
+      </div>
+    </div>
+  </div>
+  <div class="notification-card">
+    <img
+      src="https://source.unsplash.com/random/40x40?woman"
+      alt="User Profile Image"
+    />
+    <div class="notification-content">
+      <p>
+        <i class="fas fa-comment-dots notification-icon"></i
+        ><strong>Jane Smith</strong> commented on your post "Hidden Gems".
+      </p>
+      <div class="notification-time">5 hours ago</div>
+      <div class="notification-actions">
+        <a href="#">Reply</a>
+        <a href="#">Like</a>
+        <a href="#">Dislike</a>
+      </div>
+    </div>
+  </div>
+  <div class="notification-card">
+    <img
+      src="https://source.unsplash.com/random/40x40?man"
+      alt="User Profile Image"
+    />
+    <div class="notification-content">
+      <p>
+        <i class="fas fa-user-plus notification-icon"></i
+        ><strong>Emily Johnson</strong> started following you.
+      </p>
+      <div class="notification-time">1 day ago</div>
+      <div class="notification-actions">
+        <a href="#">Follow Back</a>
+      </div>
+    </div>
+  </div>
+  <div class="notification-card">
+    <img
+      src="https://source.unsplash.com/random/40x40?man2"
+      alt="User Profile Image"
+    />
+    <div class="notification-content">
+      <p>
+        <i class="fas fa-pen-nib notification-icon"></i
+        ><strong>Michael Lee</strong> posted a new article "Exploring the
+        Universe".
+      </p>
+      <div class="notification-time">3 days ago</div>
+      <div class="notification-actions">
+        <a href="#">Read</a>
+        <a href="#">Like</a>
+        <a href="#">Comment</a>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+{% block footer %}{% endblock  %}

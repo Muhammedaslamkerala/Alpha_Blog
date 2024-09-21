@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'accounts/css/user_profile_page_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="profile-header text-center">
+                <img src="{{ user.profile.get_profile_picture_url }}" alt="{{ user.get_full_name }}'s profile picture" class="profile-image">
+                <h1 class="profile-name">{{ user.get_full_name }}</h1>
+                <p class="profile-bio">{{ user.profile.bio }}</p>
+                <div class="profile-actions">
+                    {% if request.user != user %}
+                        <button class="btn-follow" id="followButton">Follow</button>
+                    {% endif %}
+                    {% if request.user == user %}
+                        <a href="{% url 'accounts:profile_edit' %}" class="btn-edit-profile">Edit Profile</a>
+                    {% endif %}
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">32</div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">5.7K</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">890</div>
+                        <div class="stat-label">Following</div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-section">
+                <h2 class="section-title">About Me</h2>
+                <p>Passionate about exploring the intersection of technology and society. I write about AI, blockchain, and emerging tech trends. Always eager to learn and share knowledge with my readers.</p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="{% static 'accounts/css/registration_page_style.css' %}">
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="register-page">
+    <div class="register-container">
+        <div class="register-form-container">
+            <div class="register-header">
+                <h1 class="logo"><i class="fas fa-pen-nib"></i> Alpha</h1>
+                <h2>Create your account</h2>
+                <p>Join our community of writers and readers</p>
+            </div>
+            <form action="#" method="post" class="register-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">Password</label>
+                    {{ form.password1 }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                    {{ form.password2 }}
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                    <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                {% if form.errors %}
+                <div class="error-message">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <button type="submit" class="btn btn-register">Sign Up</button>
+            </form>
+            <div class="register-options">
+                <p class="login-prompt">Already have an account? <a href="{% url 'accounts:login' %}">Log in</a></p>
+            </div>
+            <div class="social-register">
+                <p class="social-register-text">Or sign up with</p>
+                <div class="social-buttons">
+                    <button class="btn btn-social btn-google">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button class="btn btn-social btn-facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button class="btn btn-social btn-github">
+                        <i class="fab fa-github"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="register-image-container">
+            <img src="{% static 'images/register-illustration.svg' %}" alt="Register Illustration" class="register-image">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

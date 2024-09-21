@@ -1,0 +1,48 @@
+
+{% for post in  posts%}
+  <article class="post">
+    <header class="post-header">
+      <h2 class="post-title">{{ post.title }}</h2>
+      <div class="post-options">
+        <div class="dropdown">
+          <button
+            class="btn btn-link"
+            type="button"
+            id="postOptionsDropdown1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="postOptionsDropdown1"
+          >
+            <li>
+              <a class="dropdown-item" href="#"
+                ><i class="fas fa-edit me-2"></i>Edit</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="#"
+                ><i class="fas fa-trash-alt me-2"></i>Delete</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p class="post-excerpt">
+       {{ post.short_description }}
+      </p>
+      <div class="post-meta">
+        <span><i class="fas fa-heart"></i> 245 likes</span>
+        <span><i class="fas fa-comment"></i> 32 comments</span>
+        <span><i class="fas fa-clock"></i> 5 min read</span>
+      </div>
+    </div>
+  </article>
+  {% endfor %}
+ 
+

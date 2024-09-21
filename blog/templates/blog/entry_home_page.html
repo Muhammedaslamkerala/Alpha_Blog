@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="{% static 'blog/css/entry_home_page_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<header class="header">
+    <div class="container">
+        <nav class="nav">
+            <a href="#" class="nav__logo">
+                <img src="{% static 'images/alpha-logo.svg' %}" alt="Alpha Logo" class="nav__logo-img">
+                Alpha
+            </a>
+            <div class="nav__links">
+                <a href="#features" class="nav__link">Features</a>
+                <a href="#testimonials" class="nav__link">Testimonials</a>
+                <a href="{% url 'accounts:login' %}" class="nav__link">Login</a>
+                <a href="#" class="nav__link nav__link--btn">Sign Up</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">Unleash Your Creativity with Alpha</h1>
+                <p class="hero__subtitle">Connect with writers and readers. Share your ideas and explore new perspectives in a vibrant community of storytellers.</p>
+                <div class="hero__cta">
+                    <a href="{% url 'accounts:login' %}" class="btn btn--primary">Get Started</a>
+                    <a href="#" class="btn btn--secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section__title">Why Choose Alpha?</h2>
+            <div class="features__grid">
+                <div class="feature">
+                    <i class="feature__icon fas fa-pencil-alt"></i>
+                    <h3 class="feature__title">Write & Publish</h3>
+                    <p class="feature__description">Share your thoughts and stories with our intuitive writing tools and easy publishing process.</p>
+                </div>
+                <div class="feature">
+                    <i class="feature__icon fas fa-users"></i>
+                    <h3 class="feature__title">Connect & Engage</h3>
+                    <p class="feature__description">Build your network, engage with fellow writers, and grow your audience.</p>
+                </div>
+                <div class="feature">
+                    <i class="feature__icon fas fa-book"></i>
+                    <h3 class="feature__title">Explore & Discover</h3>
+                    <p class="feature__description">Find inspiring content tailored to your interests and discover new perspectives.</p>
+                </div>
+                <div class="feature">
+                    <i class="feature__icon fas fa-chart-line"></i>
+                    <h3 class="feature__title">Grow & Monetize</h3>
+                    <p class="feature__description">Track your performance and turn your passion into a profitable venture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section__title">What Our Users Say</h2>
+            <div class="testimonials__grid">
+                <div class="testimonial">
+                    <p class="testimonial__text">"Alpha has transformed my writing career. The community support is incredible!"</p>
+                    <div class="testimonial__author">
+                        <img src="{% static 'images/user1.jpg' %}" alt="User 1" class="testimonial__author-img">
+                        <div class="testimonial__author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Freelance Writer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial__text">"I've found my tribe on Alpha. It's more than just a platform; it's a community."</p>
+                    <div class="testimonial__author">
+                        <img src="{% static 'images/user2.jpg' %}" alt="User 2" class="testimonial__author-img">
+                        <div class="testimonial__author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Aspiring Novelist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2 class="section__title">Ready to Start Your Writing Journey?</h2>
+            <p class="cta__subtitle">Join thousands of writers who have found their voice on Alpha.</p>
+            <a href="{% url 'accounts:login' %}" class="btn btn--primary btn--large">Join Alpha Today</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__brand">
+                <img src="{% static 'images/alpha-logo-white.svg' %}" alt="Alpha Logo" class="footer__logo">
+                <p>Empowering writers to share their stories with the world.</p>
+            </div>
+            <div class="footer__links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer__social">
+                <h4>Connect With Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2023 Alpha. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+

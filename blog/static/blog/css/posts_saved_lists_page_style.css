@@ -1,0 +1,113 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+.post {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05);
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+.post:hover {
+    transform: translateY(-5px);
+}
+.post-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9ecef;
+}
+.post-header-left {
+    display: flex;
+    align-items: center;
+}
+.post-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+.post-header .user-name {
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 2px;
+}
+.post-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+.post-content {
+    padding: 25px;
+}
+.post-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #343a40;
+}
+.post-excerpt {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+.post-footer {
+    padding: 15px 25px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+.post-meta i {
+    margin-right: 5px;
+}
+.search-bar {
+    margin-bottom: 30px;
+}
+.search-bar input {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+.btn-follow {
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+}
+.btn-read-more {
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+.post-options {
+    margin-left: 10px;
+}
+.post-options .dropdown-menu {
+    min-width: 100px;
+}
+.post-options .dropdown-item {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+}
+.saved-posts-header {
+    margin-bottom: 30px;
+}
+.saved-posts-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #343a40;
+}
+.saved-posts-header p {
+    color: #6c757d;
+    font-size: 1rem;
+}

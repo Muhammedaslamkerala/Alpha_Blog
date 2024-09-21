@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="{% static 'accounts/css/user_profile_edit_page_style.css' %}">
+{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<div class="edit-profile-page">
+    <div class="container">
+        <div class="edit-profile-container">
+            <h1 class="edit-profile-title">Edit Your Profile</h1>
+            <form method="post" enctype="multipart/form-data" class="edit-profile-form">
+                {% csrf_token %}
+                <div class="form-group profile-image-group">
+                    <label for="{{ form.profile_picture.id_for_label }}" class="profile-image-label">
+                        <img src="{{ user.profile.get_profile_picture_url }}" alt="Profile Picture" class="profile-image-preview" id="profileImagePreview">
+                        <div class="profile-image-overlay">
+                            <i class="fas fa-camera"></i>
+                            <span>Change Photo</span>
+                        </div>
+                    </label>
+                    {{ form.profile_picture }}
+                </div>
+                {% for field in form %}
+                    {% if field.name != 'profile_picture' %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <button type="submit" class="btn btn-primary btn-save-profile">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+<script>
+document.getElementById('id_profile_picture').addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profileImagePreview').setAttribute('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    }
+});
+</script>

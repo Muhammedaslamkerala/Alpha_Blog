@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "blog/css/publihsed_draft_posts_list_page_style.css" %}">
+{% endblock %}
+
+{% block content %}
+<main class="container mt-5">
+  <div class="row">
+      <div class="col-lg-8 mx-auto">
+          <h1 class="mb-4">Your Stories</h1>
+
+          <!-- Navigation Tabs -->
+          <ul class="nav nav-tabs post-type-tabs" id="postTypeTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                  <a
+                      class="nav-link {% if selected_tab == 'published'%}active{%endif%}"
+                      id="published-tab"
+                      href="?tab=published"
+                      role="tab"
+                      aria-controls="published"
+                      aria-selected="{% if selected_tab == 'published'%}true{%else%}false{%endif%}"
+                  >
+                      Published
+              </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                  <a
+                      class="nav-link {% if selected_tab == 'draft'%}active{%endif%}"
+                      id="draft-tab"
+                      href="?tab=draft"
+                      role="tab"
+                      aria-controls="draft"
+                      aria-selected="{% if selected_tab == 'draft'%}true{%else%}false{%endif%}"
+                  >
+                      Drafts
+              </a>
+              </li>
+          </ul>
+
+          <!-- Tab Content -->
+          <div class="tab-content" id="postsTabContent">
+              <!-- Published Tab -->
+              <div
+                  class="tab-pane fade {% if selected_tab == 'published'%}show active{%endif%}"
+                  id="published"
+                  role="tabpanel"
+                  aria-labelledby="published-tab"
+              >
+                  {% include "blog/published_posts_list.html" with posts=post_list %}
+              </div>
+
+              <!-- Draft Tab -->
+              <div
+                  class="tab-pane fade {% if selected_tab == 'draft'%}show active{%endif%}"
+                  id="draft"
+                  role="tabpanel"
+                  aria-labelledby="draft-tab"
+              >
+                  {% include "blog/draft_posts_list_page.html" with posts=post_list %}
+              </div>
+          </div>
+      </div>
+  </div>
+</main>
+
+
+    {% endblock  %}
+    {% block footer %}
+    {% endblock  %}

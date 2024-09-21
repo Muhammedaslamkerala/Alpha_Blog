@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "blog/css/posts_saved_lists_page_style.css" %}">
+{% endblock extra_head %}
+
+   {% block content %}
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="saved-posts-header">
+                    <h1>Your Saved Posts</h1>
+                    <p>Revisit and manage the posts you've saved for later reading.</p>
+                </div>
+
+                <div class="search-bar">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search your saved posts" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="saved-posts-container">
+                    <article class="post">
+                        <header class="post-header">
+                            <div class="post-header-left">
+                                <img src="https://source.unsplash.com/random/50x50?face" alt="User Profile Image">
+                                <div>
+                                    <div class="user-name">John Doe</div>
+                                    <div class="post-date">July 18, 2024</div>
+                                </div>
+                            </div>
+                            <div class="post-options">
+                                <div class="dropdown">
+                                    <button class="btn btn-link" type="button" id="postOptionsDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="postOptionsDropdown1">
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-bookmark-slash me-2"></i>Unsave</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-share me-2"></i>Share</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="post-content">
+                            <h2 class="post-title">The Future of Artificial Intelligence</h2>
+                            <p class="post-excerpt">Exploring the latest advancements in AI and their potential impact on various industries. From machine learning to neural networks, discover how AI is reshaping our world.</p>
+                            <a href="#" class="btn btn-primary btn-sm btn-read-more">Read More</a>
+                            <div class="post-meta">
+                                <span><i class="fas fa-heart"></i> 245 likes</span>
+                                <span><i class="fas fa-comment"></i> 32 comments</span>
+                                <span><i class="fas fa-clock"></i> 5 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <header class="post-header">
+                            <div class="post-header-left">
+                                <img src="https://source.unsplash.com/random/50x50?woman" alt="User Profile Image">
+                                <div>
+                                    <div class="user-name">Jane Smith</div>
+                                    <div class="post-date">July 17, 2024</div>
+                                </div>
+                            </div>
+                            <div class="post-options">
+                                <div class="dropdown">
+                                    <button class="btn btn-link" type="button" id="postOptionsDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="postOptionsDropdown2">
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-bookmark-slash me-2"></i>Unsave</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-share me-2"></i>Share</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="post-content">
+                            <h2 class="post-title">Hidden Gems: Unexplored Travel Destinations</h2>
+                            <p class="post-excerpt">Discover off-the-beaten-path destinations that offer unique experiences. From serene beaches to vibrant cultural spots, find your next adventure.</p>
+                            <a href="#" class="btn btn-primary btn-sm btn-read-more">Read More</a>
+                            <div class="post-meta">
+                                <span><i class="fas fa-heart"></i> 180 likes</span>
+                                <span><i class="fas fa-comment"></i> 25 comments</span>
+                                <span><i class="fas fa-clock"></i> 4 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="post">
+                        <header class="post-header">
+                            <div class="post-header-left">
+                                <img src="https://source.unsplash.com/random/50x50?man" alt="User Profile Image">
+                                <div>
+                                    <div class="user-name">Alex Johnson</div>
+                                    <div class="post-date">July 16, 2024</div>
+                                </div>
+                            </div>
+                            <div class="post-options">
+                                <div class="dropdown">
+                                    <button class="btn btn-link" type="button" id="postOptionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="postOptionsDropdown3">
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-bookmark-slash me-2"></i>Unsave</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-share me-2"></i>Share</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="post-content">
+                            <h2 class="post-title">A Guide to Modern Web Development</h2>
+                            <p class="post-excerpt">Stay ahead in web development with the latest tools, frameworks, and best practices. Learn how to build robust, scalable web applications.</p>
+                            <a href="#" class="btn btn-primary btn-sm btn-read-more">Read More</a>
+                            <div class="post-meta">
+                                <span><i class="fas fa-heart"></i> 210 likes</span>
+                                <span><i class="fas fa-comment"></i> 40 comments</span>
+                                <span><i class="fas fa-clock"></i> 7 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+    
+{% block footer %}
+{% endblock  %}

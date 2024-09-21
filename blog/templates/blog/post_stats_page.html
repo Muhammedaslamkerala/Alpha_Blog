@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static "blog/css/post_stats_page_style.css" %}">
+{% endblock  %}
+
+{% block content %}
+    <div class="container">
+        <div class="stats-card">
+            <h3>Your Story Stats</h3>
+
+            <div class="stat-item">
+                <div>
+                    <i class="fas fa-eye"></i>
+                    <span class="stat-label">Total Views</span>
+                </div>
+                <div class="stat-value">1,234</div>
+            </div>
+            
+            <div class="stat-item">
+                <div>
+                    <i class="fas fa-thumbs-up"></i>
+                    <span class="stat-label">Total Likes</span>
+                </div>
+                <div class="stat-value">567</div>
+            </div>
+            
+            <div class="stat-item">
+                <div>
+                    <i class="fas fa-comment-alt"></i>
+                    <span class="stat-label">Total Comments</span>
+                </div>
+                <div class="stat-value">89</div>
+            </div>
+            
+            <div class="stat-item">
+                <div>
+                    <i class="fas fa-share-alt"></i>
+                    <span class="stat-label">Total Shares</span>
+                </div>
+                <div class="stat-value">23</div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="statsChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="lifetime-section">
+            <h4>Lifetime Stats</h4>
+            <div class="lifetime-item">
+                <div>
+                    <i class="fas fa-calendar-alt"></i>
+                    <span class="lifetime-label">Total Lifetime Views</span>
+                </div>
+                <div class="lifetime-value">12,345</div>
+            </div>
+            
+            <div class="lifetime-item">
+                <div>
+                    <i class="fas fa-heart"></i>
+                    <span class="lifetime-label">Total Lifetime Likes</span>
+                </div>
+                <div class="lifetime-value">4,567</div>
+            </div>
+            
+            <div class="lifetime-item">
+                <div>
+                    <i class="fas fa-comments"></i>
+                    <span class="lifetime-label">Total Lifetime Comments</span>
+                </div>
+                <div class="lifetime-value">789</div>
+            </div>
+            
+            <div class="lifetime-item">
+                <div>
+                    <i class="fas fa-share-square"></i>
+                    <span class="lifetime-label">Total Lifetime Shares</span>
+                </div>
+                <div class="lifetime-value">234</div>
+            </div>
+        </div>
+
+        <div class="latest-posts">
+            <h4>Latest Posts</h4>
+            <div class="filter-options">
+                <select id="postFilter">
+                    <option value="latest">Latest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="most-views">Most Views</option>
+                    <option value="least-views">Least Views</option>
+                </select>
+            </div>
+
+            <div class="total-post-count">
+                Total Posts: 10
+            </div>
+
+            <div class="post-item">
+                <h5>Post Title 1</h5>
+                <div class="post-details">
+                    Published on August 25, 2024
+                </div>
+                <div class="post-stats">
+                    <span><i class="fas fa-eye"></i> Views: 1,234</span>
+                    <span><i class="fas fa-thumbs-up"></i> Likes: 567</span>
+                    <span><i class="fas fa-comment-alt"></i> Comments: 89</span>
+                </div>
+                <div class="view-story-link">
+                    <a href="#">View Story</a>
+                </div>
+            </div>
+
+            <!-- Add more post items as needed -->
+
+        </div>
+    </div>
+    {% endblock  %}
+    {% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        const ctx = document.getElementById('statsChart').getContext('2d');
+        const statsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Views',
+                    data: [100, 200, 150, 300, 250, 400],
+                    borderColor: '#007bff',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Views Over Time'
+                    }
+                }
+            }
+        });
+
+        document.getElementById('postFilter').addEventListener('change', function() {
+            // Add your filtering logic here
+            console.log('Filter selected: ' + this.value);
+        });
+    </script>
+    {% endblock %}
+
+

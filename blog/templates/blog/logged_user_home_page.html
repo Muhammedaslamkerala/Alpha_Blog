@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "blog/css/logged_user_home_page_style.css" %}">
+{% endblock  %}
+
+{% block content %}
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="search-bar">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search for blogs" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="posts-container">
+                {% include "blog/posts_list_page.html" with posts=post_list %}
+                </div>
+                
+                <!-- Bootstrap 5 Paginator -->
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+{% endblock  %}

@@ -1,0 +1,41 @@
+{% for post in posts %}
+    <article class="post">
+        <header class="post-header">
+            <div class="post-header-left">
+                <img src="{{ post.author.get_profile_picture_url }}" alt="{{ post.author.get_full_name }}">
+                <div>
+                    <div class="user-name">{{ post.author.get_full_name }}</div>
+                    <div class="post-date">{{ post.published_date|date:"F d, Y" }}</div>
+                </div>
+            </div>
+            <div class="post-options">
+                <div class="dropdown">
+                    <button class="btn btn-link" type="button" id="postOptionsDropdown{{ forloop.counter }}" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="postOptionsDropdown{{ forloop.counter }}">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-bookmark me-2"></i>Save</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Follow</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-link me-2"></i>Copy link</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fab fa-twitter me-2"></i>Share to Twitter</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fab fa-whatsapp me-2"></i>Share to WhatsApp</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fab fa-facebook-f me-2"></i>Share to Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="post-content">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <p class="post-excerpt">{{ post.short_description }}</p>
+            {% if post.slug %}
+                <a href="{% url 'blog:post_details' post.slug %}" class="btn btn-primary btn-sm btn-read-more">Read More</a>
+            {% endif %}
+            <div class="post-meta">
+                <span><i class="fas fa-heart"></i> 245 likes</span>
+                <span><i class="fas fa-comment"></i> 324 comments</span>
+                <span><i class="fas fa-clock"></i> 5 min read</span>
+            </div>
+        </div>
+    </article>
+{% endfor %}
+

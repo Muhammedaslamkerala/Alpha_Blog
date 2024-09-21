@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Post
+from .models import Category, Post, Like
 from comments.models import Comment
 # Register your models here.
 
@@ -9,21 +9,22 @@ class CommentInline(admin.StackedInline):
     model = Comment
     extra = 1
 
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title','author','published_date', 'is_published')
-    list_filter = ('is_published','categories','tags')
-    search_fields = ('title',)
-    date_hierarchy = 'published_date'
-    ordering = ('-published_date',)
-    filter_horizontal = ('categories','tags', )
-    inlines = [CommentInline]
-    fieldsets = (
-        ('None',{
-            'fields': ('title', 'body', 'author', 'categories', 'tags','is_published' )
-        }),
+admin.site.register(Post)
+# @admin.register(Post)
+# class PostAdmin(admin.ModelAdmin):
+#     list_display = ('title','author','published_date', 'is_published')
+#     list_filter = ('is_published','categories','tags')
+#     search_fields = ('title',)
+#     date_hierarchy = 'published_date'
+#     ordering = ('-published_date',)
+#     filter_horizontal = ('categories','tags', )
+#     inlines = [CommentInline]
+#     fieldsets = (
+#         ('None',{
+#             'fields': ('title', 'body', 'author', 'categories', 'tags','is_published' )
+#         }),
         
-    )
+#     )
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -33,3 +34,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 
+admin.site.register(Like)

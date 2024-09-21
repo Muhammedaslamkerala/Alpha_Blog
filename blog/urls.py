@@ -1,18 +1,29 @@
 from django.urls import path
 from blog import views
+from django.contrib.auth import views as auth_views
+from django.contrib.sitemaps.views import sitemap
+from blog.sitemaps import PostSitemap
+from .feeds import LatestPostsFeed
 
 app_name = 'blog'
 
+sitemaps = {
+    'posts':PostSitemap,
+}
+
+
 urlpatterns = [
-    path('',views.PostListView.as_view(),name='home'),
-    path('category/<int:pk>', views.CategoryPostListView.as_view(), name='category'),
-    path('post/<int:pk>/', views.PostDetailView.as_view(), name='post_details'),
-    path('search/', views.SearchListView.as_view(), name='search'),
-    path('dashboard/', views.DashbordView.as_view(), name='dashboard'),
-    path('dashboard/post/write/', views.PostCreateView.as_view(), name='post_write'),
-    path('dashboard/post/<int:pk>/delete', views.PostDelete.as_view(),name='post_delete'),
-    path('dashboard/post/drafts/', views.DraftListView.as_view(), name='post_draft'),
-    path('dashboard/post/<int:pk>/edit/', views.PostEditView.as_view(), name='post_edit'),
-    path('dashboard/published/', views.PostPublishedListView.as_view(), name='published'),
-    path('post/tags/<int:pk>/', views.TagPostListview.as_view(), name='post_tags'),  
+    path('home/',views.EntryHomeView.as_view(), name='home'),
+    path('',views.PostListView.as_view(),name='post_list'),
+    path('post/<slug:slug>/', views.PostDetailView.as_view(), name='post_details'),
+    path('new-story', views.PostCreateView.as_view(), name='post_write'),
+    path('post/<slug:slug>/edit/', views.PostEditView.as_view(), name='post_edit'),
+    path('post/<slug:slug>/delete', views.PostDeleteView.as_view(), name='post-delete'),
+    path('me/saved-posts/', views.saved, name='saved_posts'),
+    path('me/stories/',views.DraftAndPublishedPostListView.as_view(),name='stories'),
+    path('feed/', LatestPostsFeed(), name='post_feed'),
+    path('sitemap.xml',sitemap,
+         {'sitemaps': sitemaps}, 
+         name='django.contrib.sitemaps.views.sitemap'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='blog:home'), name='logout')
 ]

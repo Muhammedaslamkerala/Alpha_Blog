@@ -1,0 +1,150 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.post-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+}
+
+.post-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+}
+
+.post-card__author {
+    display: flex;
+    align-items: center;
+}
+
+.post-card__author-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.post-card__author-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.post-card__date {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.post-card__options-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.post-card__content {
+    padding: 1.5rem;
+}
+
+.post-card__title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #343a40;
+}
+
+.post-card__description {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.post-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.post-card__read-more {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.post-card__read-more:hover {
+    color: #0056b3;
+}
+
+.post-card__meta {
+    display: flex;
+    align-items: center;
+}
+
+.post-card__meta-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.post-card__meta-btn i {
+    margin-right: 0.25rem;
+}
+
+.post-card__read-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item i {
+    margin-right: 0.5rem;
+    width: 1rem;
+    text-align: center;
+}
+
+.search-bar {
+    margin-bottom: 2rem;
+}
+
+.search-bar input {
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+}
+
+.search-bar .btn {
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+}
+
+.scrollable-menu {
+    max-height: 200px;
+    overflow-y: auto;
+}
+

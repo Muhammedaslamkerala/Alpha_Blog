@@ -1,0 +1,52 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+.post {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05);
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+.container {
+    margin-top: 20px;
+}
+.notification-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.notification-card img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.notification-card .notification-content {
+    flex-grow: 1;
+}
+.notification-card .notification-time {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+.notification-icon {
+    margin-right: 10px;
+    color: #007bff;
+}
+.notification-card .notification-actions {
+    display: flex;
+    gap: 10px;
+}
+.notification-actions a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 0.9rem;
+}
